@@ -1,0 +1,63 @@
+/* public/styles/main.css */
+:root {
+    --background-color: #ffffff;
+    --text-color: #000000;
+}
+
+.dark-mode {
+    --background-color: #121212;
+    --text-color: #ffffff;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Stile für den Dark/Light Mode Button */
+#toggle-mode {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border: 1px solid var(--text-color);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Stile für die Bio-Seite */
+.bio-container {
+    text-align: center;
+    padding: 20px;
+}
+
+.bio-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.bio-links {
+    list-style: none;
+    padding: 0;
+}
+
+.bio-links li {
+    margin: 10px 0;
+}
+
+.bio-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 18px;
+}
+
+footer {
+    margin-top: 40px;
+    font-size: 14px;
+    color: var(--text-color);
+}
