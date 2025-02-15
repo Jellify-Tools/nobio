@@ -1,39 +1,24 @@
-// src/pages/Bio.js
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+const express = require('express');
+const { connect } = require('./db'); // Importiere die Verbindungsfunktion
+const router = express.Router();
 
-const Bio = () => {
-    const { id } = useParams(); // Holt die ID aus der URL (z.B. /lokal)
-    const [bio, setBio] = useState(null);
+// Route, um Bio-Daten basierend auf der ID abzurufen
+router.get('/:id', async (req, res) => {
+    const { id } = req.params;
 
-    useEffect(() => {
-        // Daten von der Datenbank abrufen (API-Endpunkt)
-        fetch(`/api/bio/${id}`)
-            .then(response => response.json())
-            .then(data => setBio(data))
-            .catch(error => console.error('Fehler beim Laden der Bio:', error));
-    }, [id]);
+    try {
+        const collection = await connect(); // Verbinde dich mit der Datenbank
+        const bio = await collection.findOne({ id }); // Suche nach der Bio
 
-    if (!bio) return <div>Loading...</div>; // Ladeanzeige, während Daten geladen werden
+        if (bio) {
+            res.json(bio); // Sende die Bio-Daten als JSON zurück
+        } else {
+            res.status(404).json({ error: 'Bio nicht gefunden' });
+        }
+    } catch (error) {
+        console.error('Fehler beim Abrufen der Bio:', error);
+        res.status(500).json({ error: 'Serverfehler' });
+    }
+});
 
-    return (
-        <div className="bio-container">
-            <img src={bio.avatar} alt={bio.name} className="bio-avatar" />
-            <h1>{bio.name}</h1>
-            <ul className="bio-links">
-                {bio.links.map((link, index) => (
-                    <li key={index}>
-                        <a href={link.url} target="_blank" rel="noopener noreferrer">
-                            {link.name}
-                        </a>
-                    </li>
-                ))}
-            </ul>
-            <footer>
-                Made with ❤️ by Lokal
-            </footer>
-        </div>
-    );
-};
-
-export default Bio;
+module.exports = router;
