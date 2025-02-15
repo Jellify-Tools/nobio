@@ -1,5 +1,5 @@
 // public/scripts/main.js
-const toggleButton = document.getElementById('toggle-mode');
+cconst toggleButton = document.getElementById('toggle-mode');
 const body = document.body;
 
 // Überprüfe, ob der Dark Mode im Local Storage gespeichert ist
