@@ -6,7 +6,7 @@ async function connect() {
     try {
         await client.connect(); // Verbinde dich mit dem Cluster
         console.log('Verbunden mit MongoDB Atlas');
-        const database = client.db('<datenbankname>'); // Wähle deine Datenbank
+        const database = client.db('<biodb>'); // Wähle deine Datenbank
         const collection = database.collection('bios'); // Wähle deine Collection
         return collection;
     } catch (error) {
