@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MongoDB Daten</title>
+</head>
+<body>
+  <h1>Dokumente in der Datenbank</h1>
+  <ul>
+    <% items.forEach(item => { %>
+      <li><strong><%= item.name %></strong>: <%= item.description %></li>
+    <% }) %>
+  </ul>
+</body>
+</html>
