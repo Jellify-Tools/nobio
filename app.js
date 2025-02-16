@@ -10,7 +10,9 @@ const app = express();
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-});
+})
+  .then(() => console.log('MongoDB verbunden'))
+  .catch(err => console.error('Fehler bei der MongoDB-Verbindung:', err));
 
 // Mongoose-Modell
 const itemSchema = new mongoose.Schema({
@@ -30,7 +32,8 @@ app.get('/', async (req, res) => {
     const items = await Item.find();
     res.render('index', { items });
   } catch (err) {
-    res.status(500).send('Serverfehler');
+    console.error('Fehler beim Abrufen der Daten:', err);
+    res.status(500).send('Serverfehler: ' + err.message);
   }
 });
 
